@@ -37,7 +37,20 @@ export class TaskResourceService {
   }
 
   private buildAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token');
+    let token: string | null = null;
+
+    if (typeof localStorage !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    if (!token && typeof globalThis !== 'undefined' && 'localStorage' in globalThis) {
+      try {
+        token = (globalThis as typeof globalThis & { localStorage?: Storage }).localStorage?.getItem('token') ?? null;
+      } catch {
+        token = null;
+      }
+    }
+
     if (!token) {
       return new HttpHeaders();
     }
