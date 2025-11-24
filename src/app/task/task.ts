@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TaskDrapDrop, TaskStatusChange} from './task-drap-drop/task-drap-drop';
 import {TaskResourceService} from './task-resource-service';
@@ -17,6 +17,7 @@ import {TaskForm, TaskFormSubmitEvent} from './task-form/task-form';
 })
 export class Task implements OnInit {
   private readonly taskResourceService = inject(TaskResourceService);
+  private readonly cdr = inject(ChangeDetectorRef);
   tasks: TaskDto[] = [];
   tasksHecho: TaskDto[] = [];
   tasksHaciendo: TaskDto[] = [];
@@ -35,11 +36,13 @@ export class Task implements OnInit {
     this.taskResourceService.getAll().subscribe({
       next: (response: TasksResponse) => {
         this.tasks = response.data ?? [];
-        this.splitByStatus();
         this.isLoading = false;
+        this.splitByStatus();
+        this.refreshView();
       },
       error: () => {
         this.isLoading = false;
+        this.refreshView();
       }
     });
   }
@@ -76,6 +79,7 @@ export class Task implements OnInit {
       next: () => {
         this.closeForm();
         this.loadTasks();
+        this.refreshView();
       }
     });
   }
@@ -89,5 +93,10 @@ export class Task implements OnInit {
   closeForm() {
     this.showForm = false;
     this.selectedTask = null;
+    this.refreshView();
+  }
+
+  private refreshView() {
+    this.cdr.detectChanges();
   }
 }
