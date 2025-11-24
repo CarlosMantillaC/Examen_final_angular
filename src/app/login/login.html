@@ -1,6 +1,12 @@
-<mat-card class="cnt">
-  <form class="cnt-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h1>{{ isRegisterMode ? 'Registrarse' : 'Login' }}</h1>
+<section class="auth-wrapper">
+  <mat-card class="auth-card">
+    <header class="auth-card__header">
+      <p class="auth-card__eyebrow">TaskFlow</p>
+      <h1>{{ isRegisterMode ? 'Crear cuenta' : 'Bienvenido de nuevo' }}</h1>
+      <p>{{ isRegisterMode ? 'Configura un acceso seguro para gestionar tus tareas.' : 'Ingresa tus credenciales para continuar.' }}</p>
+    </header>
+
+    <form class="auth-card__form" [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-form-field class="short-input">
       <input type="text" matInput placeholder="Email" formControlName="email">
       <mat-error *ngIf="form.get('email')?.hasError('required')">El correo es obligatorio</mat-error>
@@ -12,14 +18,15 @@
       <mat-error *ngIf="form.get('password')?.hasError('required')">La contraseña es obligatoria</mat-error>
     </mat-form-field>
 
-    <div class="button">
-      <button type="submit" mat-button>{{ isRegisterMode ? 'Crear cuenta' : 'Entrar' }}</button>
-    </div>
+      <div class="button-group">
+        <button type="submit" mat-flat-button color="primary">{{ isRegisterMode ? 'Crear cuenta' : 'Entrar' }}</button>
+      </div>
 
-    <button type="button" class="link" mat-button (click)="toggleMode()">
-      {{ isRegisterMode ? '¿Ya tienes cuenta? Inicia sesión' : '¿Aún no tienes cuenta? Regístrate' }}
-    </button>
-  </form>
-</mat-card>
+      <button type="button" class="link" mat-stroked-button (click)="toggleMode()">
+        {{ isRegisterMode ? '¿Ya tienes cuenta? Inicia sesión' : '¿Aún no tienes cuenta? Regístrate' }}
+      </button>
+    </form>
+  </mat-card>
+</section>
 
 
