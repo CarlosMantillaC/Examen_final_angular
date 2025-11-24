@@ -1,0 +1,51 @@
+<form class="task-form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <div class="task-form__header">
+    <h2>{{ title }} tarea</h2>
+  </div>
+
+  <div class="task-form__fields">
+    <mat-form-field appearance="outline">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" placeholder="Ingresa un título" />
+      <mat-error *ngIf="taskForm.get('title')?.hasError('required')">El título es obligatorio</mat-error>
+      <mat-error *ngIf="taskForm.get('title')?.hasError('maxlength')">Máximo 255 caracteres</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="description" placeholder="Describe la tarea"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Prioridad</mat-label>
+      <input matInput type="number" formControlName="priority" min="1" placeholder="1" />
+      <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">La prioridad es obligatoria</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha límite</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dueAt" />
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Horas estimadas</mat-label>
+      <input matInput type="number" formControlName="estimatedHours" min="1" max="50" />
+      <mat-error *ngIf="taskForm.get('estimatedHours')?.hasError('min')">Mínimo 1 hora</mat-error>
+      <mat-error *ngIf="taskForm.get('estimatedHours')?.hasError('max')">Máximo 50 horas</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="task-form__actions">
+    <button mat-flat-button color="primary" type="submit">{{ title }} tarea</button>
+    <button mat-stroked-button type="button" (click)="onCancelEdit()">Cancelar</button>
+  </div>
+</form>

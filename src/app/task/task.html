@@ -1,0 +1,35 @@
+<section class="task-page">
+  <header class="task-page__header">
+    <div>
+      <p class="task-page__eyebrow">Tablero Kanban</p>
+      <h1>Tareas</h1>
+    </div>
+    <button type="button" class="task-page__create" (click)="openCreateForm()">
+      {{ selectedTask ? 'Editar tarea' : 'Crear tarea' }}
+    </button>
+  </header>
+
+  <section class="task-page__form" *ngIf="showForm">
+    <app-task-form
+      [task]="selectedTask"
+      (formSubmit)="handleFormSubmit($event)"
+      (cancel)="closeForm()"
+    ></app-task-form>
+  </section>
+
+  <section class="task-page__board">
+    <div *ngIf="isLoading" class="task-page__loading">Cargando tareas...</div>
+    <div *ngIf="!isLoading && tasks.length === 0" class="task-page__empty">
+      No hay tareas registradas aún. ¡Crea la primera!
+    </div>
+    <app-task-drap-drop
+      *ngIf="!isLoading"
+      [tasksPorHacer]="tasksPorHacer"
+      [tasksHaciendo]="tasksHaciendo"
+      [tasksHecho]="tasksHecho"
+      (changes)="handleStatusChange($event)"
+      (edit)="onEditTask($event)"
+      (delete)="onDeleteTask($event)"
+    ></app-task-drap-drop>
+  </section>
+</section>

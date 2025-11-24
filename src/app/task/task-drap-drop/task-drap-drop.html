@@ -1,0 +1,121 @@
+<section class="task-board">
+  <div class="task-board__column">
+    <header class="task-board__column-header">
+      <div>
+        <p class="task-board__eyebrow">Estado</p>
+        <h3>Por hacer</h3>
+      </div>
+      <span>{{ tasksPorHacer.length }}</span>
+    </header>
+
+    <div
+      class="task-board__list"
+      cdkDropList
+      id="porHacerList"
+      [cdkDropListData]="tasksPorHacer"
+      [cdkDropListConnectedTo]="['haciendoList', 'hechoList']"
+      (cdkDropListDropped)="onDrop($event, TaskStatus.POR_HACER)"
+    >
+      <p class="task-board__empty" *ngIf="tasksPorHacer.length === 0">Sin tareas pendientes</p>
+
+      <article
+        class="task-card"
+        *ngFor="let task of tasksPorHacer; trackBy: trackByTaskId"
+        cdkDrag
+      >
+        <header class="task-card__header">
+          <h4>{{ task.title }}</h4>
+          <div class="task-card__actions">
+            <button type="button" (click)="$event.stopPropagation(); edit.emit(task)">Editar</button>
+            <button type="button" class="danger" (click)="$event.stopPropagation(); delete.emit(task)">Eliminar</button>
+          </div>
+        </header>
+        <p class="task-card__description" *ngIf="task.description">{{ task.description }}</p>
+        <footer class="task-card__meta">
+          <span>Prioridad: {{ task.priority }}</span>
+          <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+        </footer>
+      </article>
+    </div>
+  </div>
+
+  <div class="task-board__column">
+    <header class="task-board__column-header">
+      <div>
+        <p class="task-board__eyebrow">Estado</p>
+        <h3>Haciendo</h3>
+      </div>
+      <span>{{ tasksHaciendo.length }}</span>
+    </header>
+
+    <div
+      class="task-board__list"
+      cdkDropList
+      id="haciendoList"
+      [cdkDropListData]="tasksHaciendo"
+      [cdkDropListConnectedTo]="['porHacerList', 'hechoList']"
+      (cdkDropListDropped)="onDrop($event, TaskStatus.HACIENDO)"
+    >
+      <p class="task-board__empty" *ngIf="tasksHaciendo.length === 0">Aún no hay tareas en progreso</p>
+
+      <article
+        class="task-card"
+        *ngFor="let task of tasksHaciendo; trackBy: trackByTaskId"
+        cdkDrag
+      >
+        <header class="task-card__header">
+          <h4>{{ task.title }}</h4>
+          <div class="task-card__actions">
+            <button type="button" (click)="$event.stopPropagation(); edit.emit(task)">Editar</button>
+            <button type="button" class="danger" (click)="$event.stopPropagation(); delete.emit(task)">Eliminar</button>
+          </div>
+        </header>
+        <p class="task-card__description" *ngIf="task.description">{{ task.description }}</p>
+        <footer class="task-card__meta">
+          <span>Prioridad: {{ task.priority }}</span>
+          <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+        </footer>
+      </article>
+    </div>
+  </div>
+
+  <div class="task-board__column">
+    <header class="task-board__column-header">
+      <div>
+        <p class="task-board__eyebrow">Estado</p>
+        <h3>Hecho</h3>
+      </div>
+      <span>{{ tasksHecho.length }}</span>
+    </header>
+
+    <div
+      class="task-board__list"
+      cdkDropList
+      id="hechoList"
+      [cdkDropListData]="tasksHecho"
+      [cdkDropListConnectedTo]="['porHacerList', 'haciendoList']"
+      (cdkDropListDropped)="onDrop($event, TaskStatus.HECHO)"
+    >
+      <p class="task-board__empty" *ngIf="tasksHecho.length === 0">No hay tareas completadas</p>
+
+      <article
+        class="task-card"
+        *ngFor="let task of tasksHecho; trackBy: trackByTaskId"
+        cdkDrag
+      >
+        <header class="task-card__header">
+          <h4>{{ task.title }}</h4>
+          <div class="task-card__actions">
+            <button type="button" (click)="$event.stopPropagation(); edit.emit(task)">Editar</button>
+            <button type="button" class="danger" (click)="$event.stopPropagation(); delete.emit(task)">Eliminar</button>
+          </div>
+        </header>
+        <p class="task-card__description" *ngIf="task.description">{{ task.description }}</p>
+        <footer class="task-card__meta">
+          <span>Prioridad: {{ task.priority }}</span>
+          <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+<mat-card class="cnt">
+  <form class="cnt-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <h1>Login</h1>
+    <mat-form-field class="short-input">
+      <input type="text" matInput placeholder="Email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field class="short-input">
+      <input type="password" matInput placeholder="Password" formControlName="password">
+    </mat-form-field>
+
+    <div class="button">
+      <button type="submit" mat-button>Login</button>
+    </div>
+  </form>
+</mat-card>
+
+

@@ -1,0 +1,66 @@
+:host {
+  display: block;
+}
+
+.task-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
+  min-height: 100vh;
+  background: #eef2ff;
+}
+
+.task-page__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 12px 24px rgba(16, 24, 40, 0.08);
+}
+
+.task-page__eyebrow {
+  color: #6366f1;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.25rem;
+}
+
+.task-page__create {
+  border: none;
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  background: #7c3aed;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #6d28d9;
+  }
+}
+
+.task-page__form {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+}
+
+.task-page__board {
+  min-height: 420px;
+}
+
+.task-page__loading,
+.task-page__empty {
+  text-align: center;
+  font-weight: 500;
+  padding: 1rem;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0.75rem;
+}
