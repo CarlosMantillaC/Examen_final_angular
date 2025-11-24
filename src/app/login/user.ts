@@ -16,3 +16,8 @@ export interface LoginResponse {
   }
   message: string;
 }
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+}

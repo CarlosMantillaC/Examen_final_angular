@@ -1,17 +1,24 @@
 <mat-card class="cnt">
   <form class="cnt-form" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <h1>Login</h1>
+    <h1>{{ isRegisterMode ? 'Registrarse' : 'Login' }}</h1>
     <mat-form-field class="short-input">
       <input type="text" matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="form.get('email')?.hasError('required')">El correo es obligatorio</mat-error>
+      <mat-error *ngIf="form.get('email')?.hasError('email')">Formato inválido</mat-error>
     </mat-form-field>
 
     <mat-form-field class="short-input">
       <input type="password" matInput placeholder="Password" formControlName="password">
+      <mat-error *ngIf="form.get('password')?.hasError('required')">La contraseña es obligatoria</mat-error>
     </mat-form-field>
 
     <div class="button">
-      <button type="submit" mat-button>Login</button>
+      <button type="submit" mat-button>{{ isRegisterMode ? 'Crear cuenta' : 'Entrar' }}</button>
     </div>
+
+    <button type="button" class="link" mat-button (click)="toggleMode()">
+      {{ isRegisterMode ? '¿Ya tienes cuenta? Inicia sesión' : '¿Aún no tienes cuenta? Regístrate' }}
+    </button>
   </form>
 </mat-card>
 
