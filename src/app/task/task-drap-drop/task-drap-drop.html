@@ -34,6 +34,7 @@
         <footer class="task-card__meta">
           <span>Prioridad: {{ task.priority }}</span>
           <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+          <span *ngIf="task.estimatedHours">Horas: {{ task.estimatedHours }}h</span>
         </footer>
       </article>
     </div>
@@ -74,6 +75,7 @@
         <footer class="task-card__meta">
           <span>Prioridad: {{ task.priority }}</span>
           <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+          <span *ngIf="task.estimatedHours">Horas: {{ task.estimatedHours }}h</span>
         </footer>
       </article>
     </div>
@@ -114,6 +116,7 @@
         <footer class="task-card__meta">
           <span>Prioridad: {{ task.priority }}</span>
           <span *ngIf="task.dueAt as due">Vence: {{ due | date: 'mediumDate' }}</span>
+          <span *ngIf="task.estimatedHours">Horas: {{ task.estimatedHours }}h</span>
         </footer>
       </article>
     </div>
