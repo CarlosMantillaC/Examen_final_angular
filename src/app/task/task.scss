@@ -2,6 +2,22 @@
   display: block;
 }
 
+.task-page__logout {
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 999px;
+  padding: 0.65rem 1.25rem;
+  background: transparent;
+  color: #0f172a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(15, 23, 42, 0.3);
+    color: #7c3aed;
+  }
+}
+
 .task-page {
   display: flex;
   flex-direction: column;
@@ -19,6 +35,12 @@
   padding: 1.5rem 2rem;
   border-radius: 1rem;
   box-shadow: 0 12px 24px rgba(16, 24, 40, 0.08);
+}
+
+.task-page__actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 
 .task-page__eyebrow {

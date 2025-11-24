@@ -4,6 +4,9 @@ import {TaskDrapDrop, TaskStatusChange} from './task-drap-drop/task-drap-drop';
 import {TaskResourceService} from './task-resource-service';
 import {CreateTaskRequest, TaskDto, TaskStatus, TasksResponse, UpdateTaskRequest} from './tasks';
 import {TaskForm, TaskFormSubmitEvent} from './task-form/task-form';
+import {LoginResourceService} from '../login/login-resource-service';
+import {LoginService} from '../login/login-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -18,6 +21,9 @@ import {TaskForm, TaskFormSubmitEvent} from './task-form/task-form';
 export class Task implements OnInit {
   private readonly taskResourceService = inject(TaskResourceService);
   private readonly cdr = inject(ChangeDetectorRef);
+  private readonly loginResourceService = inject(LoginResourceService);
+  private readonly loginService = inject(LoginService);
+  private readonly router = inject(Router);
   tasks: TaskDto[] = [];
   tasksHecho: TaskDto[] = [];
   tasksHaciendo: TaskDto[] = [];
@@ -94,6 +100,18 @@ export class Task implements OnInit {
     this.showForm = false;
     this.selectedTask = null;
     this.refreshView();
+  }
+
+  onLogout() {
+    this.loginResourceService.logout().subscribe({
+      next: () => this.handleLogoutNavigation(),
+      error: () => this.handleLogoutNavigation()
+    });
+  }
+
+  private handleLogoutNavigation() {
+    this.loginService.clearToken();
+    this.router.navigate(['login']);
   }
 
   private refreshView() {

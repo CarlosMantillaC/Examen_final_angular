@@ -4,9 +4,14 @@
       <p class="task-page__eyebrow">Tablero Kanban</p>
       <h1>Tareas</h1>
     </div>
-    <button type="button" class="task-page__create" (click)="openCreateForm()">
-      {{ selectedTask ? 'Editar tarea' : 'Crear tarea' }}
-    </button>
+    <div class="task-page__actions">
+      <button type="button" class="task-page__logout" (click)="onLogout()">
+        Cerrar sesión
+      </button>
+      <button type="button" class="task-page__create" (click)="openCreateForm()">
+        {{ selectedTask ? 'Editar tarea' : 'Crear tarea' }}
+      </button>
+    </div>
   </header>
 
   <section class="task-page__form" *ngIf="showForm">
