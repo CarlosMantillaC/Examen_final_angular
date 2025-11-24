@@ -1,0 +1,9 @@
+version: '3.9'
+
+services:
+  task-angular:
+    build: .
+    container_name: task-angular
+    ports:
+      - "8083:80"
+    restart: unless-stopped
