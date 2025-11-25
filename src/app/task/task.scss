@@ -39,8 +39,37 @@
 
 .task-page__actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.task-page__exports {
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    background: rgba(99, 102, 241, 0.08);
+    color: #4c1d95;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.55rem 1.25rem;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.8);
+      color: #5b21b6;
+    }
+  }
+}
+
+.task-page__cta {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .task-page__eyebrow {

@@ -5,12 +5,18 @@
       <h1>Tareas</h1>
     </div>
     <div class="task-page__actions">
-      <button type="button" class="task-page__logout" (click)="onLogout()">
-        Cerrar sesión
-      </button>
-      <button type="button" class="task-page__create" (click)="openCreateForm()">
-        {{ selectedTask ? 'Editar tarea' : 'Crear tarea' }}
-      </button>
+      <div class="task-page__exports">
+        <button type="button" (click)="exportToPDF()">Exportar PDF</button>
+        <button type="button" (click)="exportToExcel()">Exportar Excel</button>
+      </div>
+      <div class="task-page__cta">
+        <button type="button" class="task-page__logout" (click)="onLogout()">
+          Cerrar sesión
+        </button>
+        <button type="button" class="task-page__create" (click)="openCreateForm()">
+          {{ selectedTask ? 'Editar tarea' : 'Crear tarea' }}
+        </button>
+      </div>
     </div>
   </header>
 
