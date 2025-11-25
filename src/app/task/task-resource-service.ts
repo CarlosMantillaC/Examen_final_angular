@@ -14,7 +14,7 @@ import {
 })
 export class TaskResourceService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://178.18.250.162:8082/api/all';
+  private baseUrl = 'https://backend.todoesomuygood.online/api/all';
 
   getAll(): Observable<TasksResponse> {
     return this.http.get<TasksResponse>(this.baseUrl, { headers: this.buildAuthHeaders() });

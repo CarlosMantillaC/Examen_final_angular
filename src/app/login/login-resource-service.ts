@@ -10,7 +10,7 @@ import {LoginService} from './login-service';
 export class LoginResourceService {
   private http = inject(HttpClient);
   private loginService = inject(LoginService);
-  private baseUrl = 'http://178.18.250.162:8082/api/auth';
+  private baseUrl = 'https://backend.todoesomuygood.online/api/auth';
 
   login(user: RegisterRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, user);
